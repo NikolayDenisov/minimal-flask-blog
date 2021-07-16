@@ -28,7 +28,12 @@
                         <div class="post_header post_header_single entry-header">
                             <h2 class="post_title entry-title"><input type="text" class="title" name="title"
                                                                       id="title" placeholder="Заголовок"
-                                                                      value="{{ title |default(None)| safe }}" required></h2>
+                                    {% if title %}
+                                                                      value="{{ title | safe }}"
+                                    {% else %}
+                                                                      value=""
+                                    {% endif %}
+                                                                      required></h2>
                         </div>
                         <!-- .post_header -->
                         <div class="post_featured"></div><!-- .post_featured -->
