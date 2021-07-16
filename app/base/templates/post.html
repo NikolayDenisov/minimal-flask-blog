@@ -15,6 +15,13 @@
                                 <span class="read-time">3 min read</span>
                             </div>
                             <h1 class="post-title">{{ post.title }}</h1>
+                            {% if  user.is_authenticated | default(false) %}
+                                <form action="{{ url_for('base_blueprint.edit_post', post_id=post.id) }}">
+                                    <button type="submit" tyle="font-size:14px">Редактировать <img
+                                            style="height:13px;width:13px;" src="/static/img/button_draw.png"
+                                    ></button>
+                                </form>
+                            {% endif %}
                             <div class="post-content">
                                 <div id="markdown_content"> {{ post.content }}</div>
                             </div>

@@ -53,6 +53,7 @@ def create_post():
 def edit_post(post_id):
     """Edit post."""
     form = NewPost
+    print('TUTUT')
     if request.method == 'POST':
         post = Posts.query.get_or_404(post_id)
         title = request.form.get('title').strip()
