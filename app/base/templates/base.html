@@ -108,6 +108,11 @@
             <div class="header-right flex">
                 <nav class="header-nav-wrap">
                     <ul class="nav-list">
+                        {% if  user.is_authenticated | default(false) %}
+                            <li class="nav-item"><a
+                                    href="{{ url_for('base_blueprint.create_post') }}">Create post</a>
+                            </li>
+                        {% endif %}
                         <li class="nav-item  nav-item-current"><a href="{{ url_for('base_blueprint.home') }}">Home</a>
                         </li>
                         <li class="nav-item "><a href="{{ url_for('base_blueprint.home') }}about/">About</a></li>
