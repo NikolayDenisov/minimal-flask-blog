@@ -1,9 +1,11 @@
+import os
 from datetime import datetime
 
 import flask_login
-from flask import Blueprint, render_template, request, url_for, redirect, jsonify
+from flask import Blueprint, render_template, request, url_for, redirect, jsonify, flash
 from flask_login import login_required
 from sqlalchemy import desc
+from werkzeug.utils import secure_filename
 
 from app import db, app
 from app.forms import NewPost
@@ -146,3 +148,27 @@ def search():
     end_result = {'posts': results}
     return jsonify(end_result)
     # return jsonify()
+
+
+def allowed_file(filename):
+    allowed_extensions = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in allowed_extensions
+
+
+@app.route('/file-upload', methods=['GET', 'POST'])
+def file_upload():
+    # TODO add post name for file
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('download_file', name=filename))

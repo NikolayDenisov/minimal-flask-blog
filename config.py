@@ -8,3 +8,4 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:////opt/blog/blog.db'
     REMEMBER_COOKIE_DURATION = 60 * 60 * 24  # 24 hours
     DEBUG=True
+    UPLOAD_FOLDER = '/opt/blog/s3/'
