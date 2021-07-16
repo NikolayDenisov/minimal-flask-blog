@@ -1,0 +1,14 @@
+{%- extends 'base.html' -%}
+
+{%- block body -%}
+    <div class="main">
+        <div class="container">
+            <div class="error-wrap text-center">
+                <span class="error-code">500</span>
+                <h1 class="error-message h2">Internal Server Error</h1>
+                <p class="message-manual">The server encountered an unexpected condition that prevented it from fulfilling the request.</p>
+                <a href="{{ url_for('base_blueprint.home') }}" class="btn btn-primary">Return to home page</a>
+            </div>
+        </div>
+    </div>
+{%- endblock -%}

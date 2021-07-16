@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{%- block body -%}
+    <div class="main">
+        <div class="single-post-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-inner-wrap">
+                            <div class="subscription-inner text-center">
+                                <h1 class="subscription-title">Welcome back!</h1>
+                                <div class="post-content">
+
+                                    <form action="" data-members-form="signin" method="post"
+                                          novalidate="novalidate">
+                                        <div class="form-field-wrap field-group-inline">
+                                            {{ form.hidden_tag() }}
+                                            {{ form.username.label(class_="sr-only") }}
+                                            {{ form.username(type="email", id="email", placeholder="Email address") }}
+                                            {% for error in form.username.errors %}
+                                                <span style="color: red;">[{{ error }}]</span>
+                                            {% endfor %}
+                                            <br>
+                                            {{ form.password.label(class_="sr-only") }}
+                                            {{ form.password(size=32, type="password", id="password", placeholder="Password") }}
+                                            {% for error in form.password.errors %}
+                                                <span style="color: red;">[{{ error }}]</span>
+                                            {% endfor %}
+                                            {{ form.submit(class="btn btn-primary btn-submit") }}
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

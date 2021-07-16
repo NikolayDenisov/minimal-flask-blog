@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html data-header="sticky" data-theme="light" data-lt-installed="true" lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Whoisdeleloper</title>
+    <link href="{{ url_for('static', filename='css/saima/css2.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/saima/screen.css') }}" rel="stylesheet">
+    <script>
+        if (typeof (Storage) !== 'undefined') {
+            if (localStorage.getItem('selected-theme') == 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else if (localStorage.getItem('selected-theme') == 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }
+    </script>
+    <meta name="description"
+          content="This is my personal blog.">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="{{ url_for('base_blueprint.home') }}">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="next" href="{{ url_for('base_blueprint.home') }}page/2/">
+
+    <meta property="og:site_name" content="Whoisdeveloper">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Whoisdeveloper">
+    <meta property="og:description"
+          content="This is my personal blog.">
+    <meta property="og:url" content="{{ url_for('base_blueprint.home') }}">
+
+    {#    <script type="application/ld+json">#}
+    {#        {#}
+    {#            "@context": "https://schema.org",#}
+    {#            "@type": "WebSite",#}
+    {#            "publisher": {#}
+    {#                "@type": "Organization",#}
+    {#                "name": "Whoisdeveloper",#}
+    {#                "url": "{{ url_for('base_blueprint.home') }}",#}
+    {#                "logo": {#}
+    {#                    "@type": "ImageObject",#}
+    {#                    "url": {#}
+    {#                        "@type": "ImageObject",#}
+    {#                        "url": "http://saima.gbjsolution.com/favicon.ico",#}
+    {#                        "width": 48,#}
+    {#                        "height": 48#}
+    {#                    }#}
+    {#                }#}
+    {#            },#}
+    {#            "url": "{{ url_for('base_blueprint.home') }}",#}
+    {#            "mainEntityOfPage": {#}
+    {#                "@type": "WebPage",#}
+    {#                "@id": "{{ url_for('base_blueprint.home') }}"#}
+    {#            },#}
+    {#            "description": "Developer blog"#}
+    {#        }#}
+    {##}
+    {##}
+    {#    </script>#}
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/saima/a_002.js') }}"></script>
+    <meta name="generator" content="Ghost 3.13">
+    <link rel="alternate" type="application/rss+xml" title="Whoisdeveloper"
+          href="{{ url_for('base_blueprint.home') }}rss">
+    <style type="text/css">.medium-zoom-overlay {
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        transition: opacity .3s;
+        will-change: opacity
+    }
+
+    .medium-zoom--opened .medium-zoom-overlay {
+        cursor: pointer;
+        cursor: zoom-out;
+        opacity: 1
+    }
+
+    .medium-zoom-image {
+        cursor: pointer;
+        cursor: zoom-in;
+        transition: transform .3s cubic-bezier(.2, 0, .2, 1)
+    }
+
+    .medium-zoom-image--hidden {
+        visibility: hidden
+    }
+
+    .medium-zoom-image--opened {
+        cursor: pointer;
+        cursor: zoom-out;
+        position: relative;
+        will-change: transform
+    }</style>
+</head>
+<body class="home-template">
+<div class="site-wrap">
+    <header class="site-header show" id="site-header">
+        <div class="container flex header-inner">
+            <div class="logo">
+                <a href="{{ url_for('base_blueprint.home') }}" class="logo-text">Whoisdeveloper</a>
+            </div>
+            <div class="header-right flex">
+                <nav class="header-nav-wrap">
+                    <ul class="nav-list">
+                        <li class="nav-item  nav-item-current"><a href="{{ url_for('base_blueprint.home') }}">Home</a>
+                        </li>
+                        <li class="nav-item "><a href="{{ url_for('base_blueprint.home') }}about/">About</a></li>
+                        <li class="nav-item "><a href="{{ url_for('base_blueprint.home') }}tags/">Tags</a></li>
+                        <li class="nav-item "><a href="{{ url_for('base_blueprint.home') }}contact/">Contact</a></li>
+
+                        <li class="nav-item">
+                            {% if  user.is_authenticated | default(false) %}
+                                <a href="{{ url_for('base_blueprint.home') }}logout/">Log out</a>
+                            {% else %}
+                                <a href="{{ url_for('base_blueprint.home') }}login/">Log in{{ user.id }}</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </nav>
+                <a href="javascript:;" class="nav-icon theme-icon" id="js-toggle-dark-light" aria-label="Toggle theme">
+                    <div class="toggle-mode">
+                        <span class="light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g
+                                data-name="Layer 2"><g data-name="sun"><rect width="24" height="24"
+                                                                             transform="rotate(180 12 12)"
+                                                                             opacity="0"></rect><path
+                                d="M12 6a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v2a1 1 0 0 0 1 1z"></path><path
+                                d="M21 11h-2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2z"></path><path
+                                d="M6 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h2a1 1 0 0 0 1-1z"></path><path
+                                d="M6.22 5a1 1 0 0 0-1.39 1.47l1.44 1.39a1 1 0 0 0 .73.28 1 1 0 0 0 .72-.31 1 1 0 0 0 0-1.41z"></path><path
+                                d="M17 8.14a1 1 0 0 0 .69-.28l1.44-1.39A1 1 0 0 0 17.78 5l-1.44 1.42a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.31z"></path><path
+                                d="M12 18a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1z"></path><path
+                                d="M17.73 16.14a1 1 0 0 0-1.39 1.44L17.78 19a1 1 0 0 0 .69.28 1 1 0 0 0 .72-.3 1 1 0 0 0 0-1.42z"></path><path
+                                d="M6.27 16.14l-1.44 1.39a1 1 0 0 0 0 1.42 1 1 0 0 0 .72.3 1 1 0 0 0 .67-.25l1.44-1.39a1 1 0 0 0-1.39-1.44z"></path><path
+                                d="M12 8a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2z"></path></g></g></svg></span>
+                        <span class="dark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g
+                                data-name="Layer 2"><g data-name="moon"><rect width="24" height="24" opacity="0"></rect><path
+                                d="M12.3 22h-.1a10.31 10.31 0 0 1-7.34-3.15 10.46 10.46 0 0 1-.26-14 10.13 10.13 0 0 1 4-2.74 1 1 0 0 1 1.06.22 1 1 0 0 1 .24 1 8.4 8.4 0 0 0 1.94 8.81 8.47 8.47 0 0 0 8.83 1.94 1 1 0 0 1 1.27 1.29A10.16 10.16 0 0 1 19.6 19a10.28 10.28 0 0 1-7.3 3zM7.46 4.92a7.93 7.93 0 0 0-1.37 1.22 8.44 8.44 0 0 0 .2 11.32A8.29 8.29 0 0 0 12.22 20h.08a8.34 8.34 0 0 0 6.78-3.49A10.37 10.37 0 0 1 7.46 4.92z"></path></g></g></svg></span>
+                    </div>
+                </a>
+                <a href="javascript:;" class="nav-icon search-icon" id="js-search-button" aria-label="Open search">
+                <span class="search-icon"><svg width="24" height="24" viewBox="0 0 24 24"
+                                               xmlns="http://www.w3.org/2000/svg">
+<path d="M22.655 19.9989L18.6896 16.0452C19.969 14.4152 20.6632 12.4024 20.6607 10.3303C20.6607 8.48497 20.1134 6.68104 19.0882 5.14668C18.063 3.61231 16.6058 2.41642 14.9009 1.71023C13.196 1.00404 11.32 0.819271 9.51007 1.17928C7.70017 1.5393 6.03766 2.42792 4.73279 3.73279C3.42792 5.03766 2.5393 6.70017 2.17928 8.51007C1.81927 10.32 2.00404 12.196 2.71023 13.9009C3.41642 15.6058 4.61231 17.063 6.14668 18.0882C7.68104 19.1134 9.48497 19.6607 11.3303 19.6607C13.4024 19.6632 15.4152 18.969 17.0452 17.6896L20.9989 21.655C21.1073 21.7643 21.2363 21.8511 21.3784 21.9103C21.5205 21.9695 21.673 22 21.8269 22C21.9809 22 22.1334 21.9695 22.2755 21.9103C22.4176 21.8511 22.5466 21.7643 22.655 21.655C22.7643 21.5466 22.8511 21.4176 22.9103 21.2755C22.9695 21.1334 23 20.9809 23 20.8269C23 20.673 22.9695 20.5205 22.9103 20.3784C22.8511 20.2363 22.7643 20.1073 22.655 19.9989V19.9989ZM4.33259 10.3303C4.33259 8.94631 4.743 7.59337 5.51192 6.44259C6.28084 5.29182 7.37374 4.3949 8.65241 3.86526C9.93108 3.33561 11.3381 3.19704 12.6955 3.46705C14.053 3.73705 15.2998 4.40353 16.2785 5.38218C17.2571 6.36083 17.9236 7.60771 18.1936 8.96514C18.4636 10.3226 18.325 11.7296 17.7954 13.0083C17.2658 14.2869 16.3688 15.3798 15.2181 16.1487C14.0673 16.9177 12.7144 17.3281 11.3303 17.3281C9.47441 17.3281 7.69451 16.5908 6.38218 15.2785C5.06985 13.9662 4.33259 12.1862 4.33259 10.3303Z"></path>
+</svg>
+</span>
+                </a>
+                <a class="menu-icon nav-icon" id="menu-toggle">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </a>
+            </div>
+            <div class="mobile-nav-wrap" id="mobile-nav">
+                <nav class="header-nav-wrap">
+                    <ul class="nav-list">
+                        <li class="nav-item  nav-item-current"><a href="{{ url_for('base_blueprint.home') }}">Home</a>
+                        </li>
+                        <li class="nav-item "><a href="{{ url_for('base_blueprint.home') }}about/">About</a></li>
+                        <li class="nav-item "><a href="{{ url_for('base_blueprint.home') }}tags/">Tags</a></li>
+                        <li class="nav-item "><a href="{{ url_for('base_blueprint.home') }}contact/">Contact</a></li>
+
+                        <li class="nav-item">
+                            {% if  user.is_authenticated | default(false) %}
+                                <a href="{{ url_for('base_blueprint.home') }}logout/">Log out</a>
+                            {% else %}
+                                <a href="{{ url_for('base_blueprint.home') }}login/">Log in{{ user.id }}</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="backdrop" id="backdrop"></div>
+        </div>
+    </header>
+    <div class="main">
+        {% block body %}
+        {% endblock body %}
+    </div>
+    <footer class="site-footer-wrap">
+        <div class="container">
+            <div class="site-footer">
+                <div class="row">
+                    <div class="col-lg-2 col-md-3 col-sm-6">
+                        <div class="widget">
+                            <h5 class="widget-title">Navigation</h5>
+                            <div class="widget-content">
+                                <ul class="nav-list">
+                                    <li class="nav-item "><a href="{{ url_for('base_blueprint.home') }}about/">About</a>
+                                    </li>
+                                    <li class="nav-item "><a
+                                            href="{{ url_for('base_blueprint.home') }}contact/">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-6">
+                        <div class="widget">
+                            <h5 class="widget-title">Social media</h5>
+                            <div class="widget-content">
+                                <ul class="nav-list">
+                                    <li><a href="https://github.com/NikolayDenisov">Github</a></li>
+                                    <li><a href="#">Reddit</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="widget widget-tag">
+                            <h5 class="widget-title">Tags</h5>
+                            <div class="widget-content">
+                                <ul class="tag-list">
+                                    <li><a href="{{ url_for('base_blueprint.home') }}tag/security/">Security</a></li>
+                                    <li><a href="{{ url_for('base_blueprint.home') }}tag/linux/">Linux</a></li>
+                                    <li><a href="{{ url_for('base_blueprint.home') }}tag/python/">Python</a></li>
+                                    <li><a href="{{ url_for('base_blueprint.home') }}tag/network/">Network</a></li>
+                                    <li><a href="{{ url_for('base_blueprint.home') }}tag/support/">Support</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget widget-subscribe">
+                            <h5 class="widget-title">Subscribe</h5>
+                            <div class="widget-content">
+                                <p>Stay up to date! Get all the latest posts delivered straight to your inbox.</p>
+                                <form class="signup-form" data-members-form="subscribe">
+                                    <div class="form-field-wrap field-group-inline">
+                                        <label for="email" class="sr-only">Email</label>
+                                        <input data-members-email="" type="email" class="email" id="email"
+                                               placeholder="Your email address" required="">
+                                        <button class="btn btn-primary btn-submit" type="submit">Subscribe</button>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="message-success"><strong>Great!</strong> Check your inbox and click
+                                            the link to confirm your subscription
+                                        </div>
+                                        <div class="message-error"><strong>Error!</strong> Please enter a valid email
+                                            address!
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="copyright text-center">
+                            © 2020 <a href="https://whoisdeveloper.com/">Whoisdeveloper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="extwaiokist" style="display:none" v="{3596"
+         f="ZXpNMU9UWm1PREV3TFdKbU5UQXRORGRsTWkxaU5UUmhMVEl4TWpobFltUmpOVEUzT1gwPQ==" q="5cfd36e5" c="316.2" i="323"
+         u="0.611" s="05032005" w="false" m="BMe=">
+        <div id="extwaiimpotscp" style="display:none" v="{3596"
+             f="ZXpNMU9UWm1PREV3TFdKbU5UQXRORGRsTWkxaU5UUmhMVEl4TWpobFltUmpOVEUzT1gwPQ==" q="5cfd36e5" c="316.2" i="323"
+             u="0.611" s="05032005" w="false" m="BMe=" vn="0adrd"></div>
+    </div>
+</div>
+<div class="notification notification-subscribe text-center">
+    <a class="notification-close" href="javascript:;"><span class="close-icon"><svg width="24" height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    xmlns="http://www.w3.org/2000/svg">
+<path d="M14.3477 11.9986L21.5075 4.85447C21.821 4.54089 21.9972 4.11558 21.9972 3.67211C21.9972 3.22864 21.821 2.80333 21.5075 2.48975C21.1939 2.17617 20.7687 2 20.3253 2C19.8819 2 19.4566 2.17617 19.1431 2.48975L12 9.65051L4.8569 2.48975C4.54337 2.17617 4.11812 2 3.67471 2C3.2313 2 2.80606 2.17617 2.49252 2.48975C2.17898 2.80333 2.00284 3.22864 2.00284 3.67211C2.00284 4.11558 2.17898 4.54089 2.49252 4.85447L9.65227 11.9986L2.49252 19.1427C2.33646 19.2975 2.21259 19.4817 2.12805 19.6846C2.04352 19.8875 2 20.1052 2 20.3251C2 20.5449 2.04352 20.7626 2.12805 20.9655C2.21259 21.1684 2.33646 21.3526 2.49252 21.5074C2.64731 21.6635 2.83147 21.7874 3.03437 21.8719C3.23727 21.9565 3.4549 22 3.67471 22C3.89452 22 4.11215 21.9565 4.31505 21.8719C4.51796 21.7874 4.70211 21.6635 4.8569 21.5074L12 14.3466L19.1431 21.5074C19.2979 21.6635 19.482 21.7874 19.6849 21.8719C19.8878 21.9565 20.1055 22 20.3253 22C20.5451 22 20.7627 21.9565 20.9656 21.8719C21.1685 21.7874 21.3527 21.6635 21.5075 21.5074C21.6635 21.3526 21.7874 21.1684 21.8719 20.9655C21.9565 20.7626 22 20.5449 22 20.3251C22 20.1052 21.9565 19.8875 21.8719 19.6846C21.7874 19.4817 21.6635 19.2975 21.5075 19.1427L14.3477 11.9986Z"></path>
+</svg>
+</span></a>
+    You've successfully subscribed to Saima Gul
+</div>
+
+<div class="notification notification-signup text-center">
+    <a class="notification-close" href="javascript:;"><span class="close-icon"><svg width="24" height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    xmlns="http://www.w3.org/2000/svg">
+<path d="M14.3477 11.9986L21.5075 4.85447C21.821 4.54089 21.9972 4.11558 21.9972 3.67211C21.9972 3.22864 21.821 2.80333 21.5075 2.48975C21.1939 2.17617 20.7687 2 20.3253 2C19.8819 2 19.4566 2.17617 19.1431 2.48975L12 9.65051L4.8569 2.48975C4.54337 2.17617 4.11812 2 3.67471 2C3.2313 2 2.80606 2.17617 2.49252 2.48975C2.17898 2.80333 2.00284 3.22864 2.00284 3.67211C2.00284 4.11558 2.17898 4.54089 2.49252 4.85447L9.65227 11.9986L2.49252 19.1427C2.33646 19.2975 2.21259 19.4817 2.12805 19.6846C2.04352 19.8875 2 20.1052 2 20.3251C2 20.5449 2.04352 20.7626 2.12805 20.9655C2.21259 21.1684 2.33646 21.3526 2.49252 21.5074C2.64731 21.6635 2.83147 21.7874 3.03437 21.8719C3.23727 21.9565 3.4549 22 3.67471 22C3.89452 22 4.11215 21.9565 4.31505 21.8719C4.51796 21.7874 4.70211 21.6635 4.8569 21.5074L12 14.3466L19.1431 21.5074C19.2979 21.6635 19.482 21.7874 19.6849 21.8719C19.8878 21.9565 20.1055 22 20.3253 22C20.5451 22 20.7627 21.9565 20.9656 21.8719C21.1685 21.7874 21.3527 21.6635 21.5075 21.5074C21.6635 21.3526 21.7874 21.1684 21.8719 20.9655C21.9565 20.7626 22 20.5449 22 20.3251C22 20.1052 21.9565 19.8875 21.8719 19.6846C21.7874 19.4817 21.6635 19.2975 21.5075 19.1427L14.3477 11.9986Z"></path>
+</svg>
+</span></a>
+    Great! Next, complete checkout to get full access to all premium content.
+</div>
+
+<div class="notification notification-signin text-center">
+    <a class="notification-close" href="javascript:;"><span class="close-icon"><svg width="24" height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    xmlns="http://www.w3.org/2000/svg">
+<path d="M14.3477 11.9986L21.5075 4.85447C21.821 4.54089 21.9972 4.11558 21.9972 3.67211C21.9972 3.22864 21.821 2.80333 21.5075 2.48975C21.1939 2.17617 20.7687 2 20.3253 2C19.8819 2 19.4566 2.17617 19.1431 2.48975L12 9.65051L4.8569 2.48975C4.54337 2.17617 4.11812 2 3.67471 2C3.2313 2 2.80606 2.17617 2.49252 2.48975C2.17898 2.80333 2.00284 3.22864 2.00284 3.67211C2.00284 4.11558 2.17898 4.54089 2.49252 4.85447L9.65227 11.9986L2.49252 19.1427C2.33646 19.2975 2.21259 19.4817 2.12805 19.6846C2.04352 19.8875 2 20.1052 2 20.3251C2 20.5449 2.04352 20.7626 2.12805 20.9655C2.21259 21.1684 2.33646 21.3526 2.49252 21.5074C2.64731 21.6635 2.83147 21.7874 3.03437 21.8719C3.23727 21.9565 3.4549 22 3.67471 22C3.89452 22 4.11215 21.9565 4.31505 21.8719C4.51796 21.7874 4.70211 21.6635 4.8569 21.5074L12 14.3466L19.1431 21.5074C19.2979 21.6635 19.482 21.7874 19.6849 21.8719C19.8878 21.9565 20.1055 22 20.3253 22C20.5451 22 20.7627 21.9565 20.9656 21.8719C21.1685 21.7874 21.3527 21.6635 21.5075 21.5074C21.6635 21.3526 21.7874 21.1684 21.8719 20.9655C21.9565 20.7626 22 20.5449 22 20.3251C22 20.1052 21.9565 19.8875 21.8719 19.6846C21.7874 19.4817 21.6635 19.2975 21.5075 19.1427L14.3477 11.9986Z"></path>
+</svg>
+</span></a>
+    Welcome back! You've successfully signed in.
+</div>
+
+<div class="notification notification-checkout text-center">
+    <a class="notification-close" href="javascript:;"><span class="close-icon"><svg width="24" height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    xmlns="http://www.w3.org/2000/svg">
+<path d="M14.3477 11.9986L21.5075 4.85447C21.821 4.54089 21.9972 4.11558 21.9972 3.67211C21.9972 3.22864 21.821 2.80333 21.5075 2.48975C21.1939 2.17617 20.7687 2 20.3253 2C19.8819 2 19.4566 2.17617 19.1431 2.48975L12 9.65051L4.8569 2.48975C4.54337 2.17617 4.11812 2 3.67471 2C3.2313 2 2.80606 2.17617 2.49252 2.48975C2.17898 2.80333 2.00284 3.22864 2.00284 3.67211C2.00284 4.11558 2.17898 4.54089 2.49252 4.85447L9.65227 11.9986L2.49252 19.1427C2.33646 19.2975 2.21259 19.4817 2.12805 19.6846C2.04352 19.8875 2 20.1052 2 20.3251C2 20.5449 2.04352 20.7626 2.12805 20.9655C2.21259 21.1684 2.33646 21.3526 2.49252 21.5074C2.64731 21.6635 2.83147 21.7874 3.03437 21.8719C3.23727 21.9565 3.4549 22 3.67471 22C3.89452 22 4.11215 21.9565 4.31505 21.8719C4.51796 21.7874 4.70211 21.6635 4.8569 21.5074L12 14.3466L19.1431 21.5074C19.2979 21.6635 19.482 21.7874 19.6849 21.8719C19.8878 21.9565 20.1055 22 20.3253 22C20.5451 22 20.7627 21.9565 20.9656 21.8719C21.1685 21.7874 21.3527 21.6635 21.5075 21.5074C21.6635 21.3526 21.7874 21.1684 21.8719 20.9655C21.9565 20.7626 22 20.5449 22 20.3251C22 20.1052 21.9565 19.8875 21.8719 19.6846C21.7874 19.4817 21.6635 19.2975 21.5075 19.1427L14.3477 11.9986Z"></path>
+</svg>
+</span></a>
+    Success! Your account is fully activated, you now have access to all content.
+</div>
+<div class="search-popup js-search-popup">
+    <div class="search-popup-bg"></div>
+    <a href="javascript:;" class="close-button" id="search-close" aria-label="Close search">
+        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.3477 11.9986L21.5075 4.85447C21.821 4.54089 21.9972 4.11558 21.9972 3.67211C21.9972 3.22864 21.821 2.80333 21.5075 2.48975C21.1939 2.17617 20.7687 2 20.3253 2C19.8819 2 19.4566 2.17617 19.1431 2.48975L12 9.65051L4.8569 2.48975C4.54337 2.17617 4.11812 2 3.67471 2C3.2313 2 2.80606 2.17617 2.49252 2.48975C2.17898 2.80333 2.00284 3.22864 2.00284 3.67211C2.00284 4.11558 2.17898 4.54089 2.49252 4.85447L9.65227 11.9986L2.49252 19.1427C2.33646 19.2975 2.21259 19.4817 2.12805 19.6846C2.04352 19.8875 2 20.1052 2 20.3251C2 20.5449 2.04352 20.7626 2.12805 20.9655C2.21259 21.1684 2.33646 21.3526 2.49252 21.5074C2.64731 21.6635 2.83147 21.7874 3.03437 21.8719C3.23727 21.9565 3.4549 22 3.67471 22C3.89452 22 4.11215 21.9565 4.31505 21.8719C4.51796 21.7874 4.70211 21.6635 4.8569 21.5074L12 14.3466L19.1431 21.5074C19.2979 21.6635 19.482 21.7874 19.6849 21.8719C19.8878 21.9565 20.1055 22 20.3253 22C20.5451 22 20.7627 21.9565 20.9656 21.8719C21.1685 21.7874 21.3527 21.6635 21.5075 21.5074C21.6635 21.3526 21.7874 21.1684 21.8719 20.9655C21.9565 20.7626 22 20.5449 22 20.3251C22 20.1052 21.9565 19.8875 21.8719 19.6846C21.7874 19.4817 21.6635 19.2975 21.5075 19.1427L14.3477 11.9986Z"></path>
+        </svg>
+    </a>
+    <div class="popup-inner">
+        <div class="inner-container">
+            <form class="search-form" id="search-form">
+                <div class="field-group-inline">
+                    <div class="search-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.655 19.9989L18.6896 16.0452C19.969 14.4152 20.6632 12.4024 20.6607 10.3303C20.6607 8.48497 20.1134 6.68104 19.0882 5.14668C18.063 3.61231 16.6058 2.41642 14.9009 1.71023C13.196 1.00404 11.32 0.819271 9.51007 1.17928C7.70017 1.5393 6.03766 2.42792 4.73279 3.73279C3.42792 5.03766 2.5393 6.70017 2.17928 8.51007C1.81927 10.32 2.00404 12.196 2.71023 13.9009C3.41642 15.6058 4.61231 17.063 6.14668 18.0882C7.68104 19.1134 9.48497 19.6607 11.3303 19.6607C13.4024 19.6632 15.4152 18.969 17.0452 17.6896L20.9989 21.655C21.1073 21.7643 21.2363 21.8511 21.3784 21.9103C21.5205 21.9695 21.673 22 21.8269 22C21.9809 22 22.1334 21.9695 22.2755 21.9103C22.4176 21.8511 22.5466 21.7643 22.655 21.655C22.7643 21.5466 22.8511 21.4176 22.9103 21.2755C22.9695 21.1334 23 20.9809 23 20.8269C23 20.673 22.9695 20.5205 22.9103 20.3784C22.8511 20.2363 22.7643 20.1073 22.655 19.9989V19.9989ZM4.33259 10.3303C4.33259 8.94631 4.743 7.59337 5.51192 6.44259C6.28084 5.29182 7.37374 4.3949 8.65241 3.86526C9.93108 3.33561 11.3381 3.19704 12.6955 3.46705C14.053 3.73705 15.2998 4.40353 16.2785 5.38218C17.2571 6.36083 17.9236 7.60771 18.1936 8.96514C18.4636 10.3226 18.325 11.7296 17.7954 13.0083C17.2658 14.2869 16.3688 15.3798 15.2181 16.1487C14.0673 16.9177 12.7144 17.3281 11.3303 17.3281C9.47441 17.3281 7.69451 16.5908 6.38218 15.2785C5.06985 13.9662 4.33259 12.1862 4.33259 10.3303Z"></path>
+                        </svg>
+                    </div>
+                    <input type="text" class="search-input" placeholder="Type to search" id="search-input"
+                           aria-label="Type to search" role="searchbox">
+                </div>
+            </form>
+            <div class="search-close-note">Press ESC to close.</div>
+            <div class="search-result" id="search-results"></div>
+        </div>
+    </div>
+</div>
+<a href="javascript:;" id="back-to-top" class="flex back-top-btn" style="opacity: 0;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M5.23 10.64a1 1 0 0 0 1.41.13L11 7.14V19a1 1 0 0 0 2 0V7.14l4.36 3.63a1 1 0 1 0 1.28-1.54l-6-5-.15-.09-.13-.07a1 1 0 0 0-.72 0l-.13.07-.15.09-6 5a1 1 0 0 0-.13 1.41z"></path>
+    </svg>
+</a>
+<script>
+    var searchUrl = 'http://whoisdeveloper.ru/search/?';
+    var nextPage = '2';
+    var totalPages = '3';
+    var loadingText = 'Loading...';
+</script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/saima/app.js') }}"></script>
+
+
+<div class="js-reframe" style="position: relative; width: 100%; padding-top: 0.0543183%;">
+    <iframe allowtransparency="true" scrolling="no" name="__privateStripeMetricsController0" allowpaymentrequest="true"
+            src="https://whoisdeveloper.ru/static/templates/saima/m-outer-a0f6c1465b8d9aab778cf2913d1d3c86.html"
+            aria-hidden="true" tabindex="-1"
+            style="border: medium none !important; margin: 0px !important; padding: 0px !important; width: 100%; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: absolute; height: 100%; pointer-events: none !important; user-select: none !important; left: 0px; top: 0px;"
+            frameborder="0"></iframe>
+</div>
+</body>
+{% block script %}
+    {#    <script type="text/javascript" src="{{ url_for('static', filename='vendors/marked/editor.js') }}"></script>#}
+    <script type="text/javascript" src="{{ url_for('static', filename='vendors/marked/marked.js') }}"></script>
+{% endblock script %}
+</html>

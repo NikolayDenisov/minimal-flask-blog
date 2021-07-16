@@ -1,0 +1,5 @@
+﻿User-agent: *
+Disallow: /login/
+Disallow: /search/
+
+Sitemap: {{ site_url }}/sitemap.xml

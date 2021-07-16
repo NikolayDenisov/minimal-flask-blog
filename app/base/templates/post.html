@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{%- block body -%}
+    <div class="main">
+        <div class="single-post-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-inner-wrap">
+                            <div class="post-info">
+                                <span class="primary-tag"><a
+                                        href="{{ url_for('base_blueprint.home')+"tag" }}/{{ post.tags or "text" }}/">{{ post.tags or "text" }}</a></span>
+                                <span class="date"><time
+                                        datetime="{{ post.created_time }}">{{ post.created_time | strftime }}</time></span>
+                                <span class="read-time">3 min read</span>
+                            </div>
+                            <h1 class="post-title">{{ post.title }}</h1>
+                            <div class="post-content">
+                                <div id="markdown_content"> {{ post.content }}</div>
+                            </div>
+                            <div class="tag-list">
+                                <span class="label">Tag:</span>
+                                <a href="{{ url_for('base_blueprint.home')+"tag" }}/{{ post.tags or "text" }}/">{{ post.tags or "text" }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="prev-nex-wrap">
+        <div class="container">
+            <div class="row">
+                {% if prev_post.id %}
+                    <div class="col-md-6">
+                        <div class="post prev-post">
+                            <a href="{{ prev_post.id }}"
+                               class="flex">
+                                <div class="content-wrap">
+                                    <div class="nav-text">Older post</div>
+                                    <h4 class="title h5">{{ prev_post.title }}</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if next_post.id %}
+                    <div class="col-md-6">
+                        <div class="post next-post">
+                            <a href="{{ next_post.id }}"
+                               class="flex">
+                                <div class="content-wrap">
+                                    <div class="nav-text">Newer post</div>
+                                    <h4 class="title h5">{{ next_post.title }}
+                                        imagination</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+{% block script %}
+    {{ super() }}
+    <script>document.getElementById('markdown_content').innerHTML = marked(document.getElementById('markdown_content').innerHTML);</script>
+{% endblock script %}
+
+

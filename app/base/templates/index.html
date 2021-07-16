@@ -1,0 +1,54 @@
+{%- extends 'base.html' -%}
+
+{%- block body -%}
+    <section>
+        <div class="container">
+            <div class="post-loop-wrap">
+                {% for post in posts.items %}
+                    <div class="post">
+                        <div class="post-info">
+                            <span class="primary-tag"><a
+                                    href="{{ url_for('base_blueprint.home')+"tag" }}/{{ post.tags or "text" }}/">{{ post.tags or "text" }}</a></span>
+                            <span class="date"><time>{{ post.created_time | strftime }}</time></span>
+{#                            <span class="read-time">4 min read</span>#}
+                        </div>
+                        <h2 class="post-title"><a
+                                href="{{ url_for('base_blueprint.post', post_id=post.id) }}">{{ post.title }}</a></h2>
+                        <div class="post-excerpt">
+                            <a href="{{ url_for('base_blueprint.post', post_id=post.id) }}">
+                                {% set content = post.content.split('\n') %}
+                                <div id="markdown_content">{{ content[0:5]|join('\n') }}</div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="pagination-wrap flex" role="navigation">
+                <div class="newer-posts">
+                    {% if posts.has_prev %}
+                        <a href="{{ url_for('base_blueprint.home')+"page" }}/{{ posts.prev_num }}">
+                            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z"></path>
+                            </svg>
+                            Newer Posts</a>
+                    {% endif %}
+                </div>
+                <span class="page-number text-center">Page {{ current_page }} of {{ max_page }}</span>
+                <div class="older-posts">
+                    {% if posts.has_next %}
+                        <a href="{{ url_for('base_blueprint.home')+"page" }}/{{ posts.next_num }}">Older Posts
+                            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path>
+                            </svg>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{%- endblock -%}
+
+{% block script %}
+    {{ super() }}
+    <script>document.getElementById('markdown_content').innerHTML = marked(document.getElementById('markdown_content').innerHTML);</script>
+{% endblock script %}

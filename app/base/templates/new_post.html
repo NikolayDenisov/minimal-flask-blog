@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/editor/0.1.0/editor.css">
+    <link href="{{ url_for('static', filename='vendors/marked/editor.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='vendors/marked/editor.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/marked/marked.js') }}"></script>
+    <style type="text/css">
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .editor-wrapper {
+            max-width: 680px;
+            padding: 10px;
+            margin: 60px auto;
+        }
+    </style>
+    <div class="post_inner">
+        <article id="post-113"
+                 class="post_item_single post_type_post post_format_ post-113 post type-post status-publish format-standard has-post-thumbnail hentry category-statistics tag-advice tag-info tag-miscellaneous tag-news">
+            <div class="post_subtitle">
+            </div>
+            <div class="editor-wrapper">
+                <form action="" method="post" novalidate>
+                    <div class="post_inner">
+                        <div class="post_header post_header_single entry-header">
+                            <h2 class="post_title entry-title"><input type="text" class="title" name="title"
+                                                                      id="title" placeholder="Заголовок"
+                                                                      value="{{ title |default(None)| safe }}" required></h2>
+                        </div>
+                        <!-- .post_header -->
+                        <div class="post_featured"></div><!-- .post_featured -->
+                        <div class="post_content post_content_single entry-content" itemprop="mainEntityOfPage">
+                            <textarea id="editor" name="content" placeholder="Текст">{{ content | safe }}</textarea>
+                        </div><!-- .entry-content -->
+                    </div><!-- post_inner -->
+                    <input id="submit" type="submit" value="Создать">
+                </form>
+            </div><!-- post_inner -->
+        </article>
+    </div><!-- .entry-content -->
+    <script type="text/javascript">
+        var editor = new Editor();
+        editor.render();
+    </script>
+{% endblock body %}

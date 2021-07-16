@@ -1,0 +1,9 @@
+Markdown
+requests
+Flask
+Flask-WTF
+flask_sqlalchemy
+Flask-Markdown
+Flask-Migrate
+flask_login
+werkzeug
