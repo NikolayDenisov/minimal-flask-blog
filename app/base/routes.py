@@ -25,11 +25,9 @@ def home(page=1):
     posts = Posts.query.with_entities(Posts.id, Posts.title, Posts.content, Posts.created_time,
                                       Posts.tags).filter_by().order_by(
         Posts.created_time.desc()).paginate(page, Posts.PER_PAGE, False)
-    max_page = len(posts.items) + 1
     current_page = posts.page
     user = flask_login.current_user
-    print(user.is_authenticated)
-    return render_template('index.html', posts=posts, max_page=max_page, current_page=current_page)
+    return render_template('index.html', posts=posts, max_page=posts.pages, current_page=current_page)
 
 
 @blueprint.route('/create_post', methods=['GET', 'POST'])
