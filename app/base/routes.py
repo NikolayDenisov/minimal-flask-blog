@@ -2,7 +2,8 @@ import os
 from datetime import datetime
 
 import flask_login
-from flask import Blueprint, render_template, request, url_for, redirect, jsonify, flash
+from flask import Blueprint, render_template, request, url_for, redirect, \
+    jsonify, flash
 from flask_login import login_required
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
@@ -22,12 +23,14 @@ blueprint = Blueprint(
 @blueprint.route('/')
 @blueprint.route('/page/<int:page>')
 def home(page=1):
-    posts = Posts.query.with_entities(Posts.id, Posts.title, Posts.content, Posts.created_time,
+    posts = Posts.query.with_entities(Posts.id, Posts.title, Posts.content,
+                                      Posts.created_time,
                                       Posts.tags).filter_by().order_by(
         Posts.created_time.desc()).paginate(page, Posts.PER_PAGE, False)
     current_page = posts.page
     user = flask_login.current_user
-    return render_template('index.html', posts=posts, max_page=posts.pages, current_page=current_page)
+    return render_template('index.html', posts=posts, max_page=posts.pages,
+                           current_page=current_page)
 
 
 @blueprint.route('/create_post', methods=['GET', 'POST'])
@@ -39,7 +42,8 @@ def create_post():
         title = request.form.get('title').strip()
         content = request.form.get('content')
         new_post = Posts(title=title,
-                         content=content, user_id=1, created_time=datetime.now())
+                         content=content, user_id=1,
+                         created_time=datetime.now())
         db.session.add(new_post)  # Adds new Users record to database
         db.session.commit()  # Commits all changes
         return redirect(url_for('base_blueprint.home'))
@@ -60,7 +64,8 @@ def edit_post(post_id):
         post.content = content
         db.session.commit()  # Commits all changes
     post = Posts.query.filter(Posts.id == post_id).first_or_404()
-    return render_template('new_post.html', form=form, title=post.title, content=post.content)
+    return render_template('new_post.html', form=form, title=post.title,
+                           content=post.content)
 
 
 def previous_post_id(pid):
@@ -97,7 +102,8 @@ def post(post_id):
     post = Posts.query.filter(Posts.id == post_id).first_or_404()
     next_post = next_post_id(post_id)
     prev_post = previous_post_id(post_id)
-    return render_template('post.html', post=post, prev_post=prev_post, next_post=next_post)
+    return render_template('post.html', post=post, prev_post=prev_post,
+                           next_post=next_post)
 
 
 @blueprint.route('/remove_post/<post_id>', methods=['GET'])
@@ -113,7 +119,8 @@ def remove_post(post_id):
 
 def get_last_posts():
     """Show last posts."""
-    posts = Posts.query.with_entities(Posts.id, Posts.title, Posts.created_time).order_by(
+    posts = Posts.query.with_entities(Posts.id, Posts.title,
+                                      Posts.created_time).order_by(
         desc(Posts.created_time)).limit(3).all()
     return posts
 
@@ -125,12 +132,15 @@ def set_globals():
 
 @blueprint.route('/tag/<tag>', methods=['GET'])
 def posts_by_tag(tag):
-    posts = Posts.query.with_entities(Posts.id, Posts.title, Posts.content, Posts.created_time, Posts.tags). \
-        filter_by(tags=tag).order_by(Posts.created_time.desc()).paginate(page=None, per_page=None, error_out=True,
-                                                                         max_per_page=None)
+    posts = Posts.query.with_entities(Posts.id, Posts.title, Posts.content,
+                                      Posts.created_time, Posts.tags). \
+        filter_by(tags=tag).order_by(Posts.created_time.desc()).paginate(
+        page=None, per_page=None, error_out=True,
+        max_per_page=None)
     current_page = posts.page
     max_page = current_page
-    return render_template('index.html', posts=posts, max_page=max_page, current_page=current_page)
+    return render_template('index.html', posts=posts, max_page=max_page,
+                           current_page=current_page)
 
 
 @blueprint.route('/search', methods=['GET'])
@@ -138,12 +148,15 @@ def search():
     what_you_need = request.query_string
     print(what_you_need)
     results = []
-    posts = Posts.query.with_entities(Posts.id, Posts.title, Posts.content, Posts.created_time, Posts.tags). \
+    posts = Posts.query.with_entities(Posts.id, Posts.title, Posts.content,
+                                      Posts.created_time, Posts.tags). \
         filter_by().order_by(Posts.created_time.desc())
     for i in posts.all():
-        results.append({'id': i[0], 'title': i[1], 'plaintext': i[2], 'tags': i[4], 'primary_tag': i[4],
-                        'excerpt': i[2][:100],
-                        'url': '{}/post/{}'.format(request.url_root, i[0])})
+        results.append(
+            {'id': i[0], 'title': i[1], 'plaintext': i[2], 'tags': i[4],
+             'primary_tag': i[4],
+             'excerpt': i[2][:100],
+             'url': '{}/post/{}'.format(request.url_root, i[0])})
     end_result = {'posts': results}
     return jsonify(end_result)
     # return jsonify()

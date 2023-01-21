@@ -4,20 +4,20 @@ from app import app
 
 
 @app.errorhandler(401)
-def unauthorized(e):
+def unauthorized():
     return render_template('errors/401.html'), 401
 
 
 @app.errorhandler(403)
-def forbidden(e):
+def forbidden():
     return render_template('errors/404.html'), 403
 
 
 @app.errorhandler(404)
-def page_not_found(e):
+def page_not_found():
     return render_template('errors/404.html'), 404
 
 
 @app.errorhandler(500)
-def internal_server_error(e):
+def internal_server_error():
     return render_template('errors/404.html'), 500

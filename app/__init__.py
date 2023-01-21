@@ -9,13 +9,14 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
+from .models import Users, Posts
+
 app = Flask(__name__, static_folder='base/static')
 app.url_map.strict_slashes = False
 app.config.from_object('config.Config')
 login = LoginManager(app)
 
 db = SQLAlchemy(app)
-from app.models import Users, Posts
 
 migrate = Migrate(app, db)
 db.create_all()
@@ -40,5 +41,7 @@ def init_logger():
     :return:
     """
     log_level = logging.DEBUG
-    logging.basicConfig(format=u"[%(asctime)s] %(filename)s #%(levelname)-8s %(message)s", level=log_level,
-                        datefmt="%Y-%m-%d %H:%M:%S")
+    logging.basicConfig(
+        format="[%(asctime)s] %(filename)s #%(levelname)-8s %(message)s",
+        level=log_level,
+        datefmt="%Y-%m-%d %H:%M:%S")
