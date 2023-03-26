@@ -1,42 +1,42 @@
-import logging
-
-from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import current_user, login_user, logout_user
-
-import app
-from app.admin.forms import LoginForm
-from app.models import Users
-
-blueprint = Blueprint(
-    'admin_blueprint',
-    __name__,
-    url_prefix='',
-    template_folder='templates')
+from app.utils import authenticate_user, create_access_token
+from fastapi import APIRouter, Request
+from fastapi.responses import HTMLResponse
+from fastapi.responses import RedirectResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.security import OAuth2PasswordRequestForm
 
 
-@blueprint.route('/login', methods=['GET', 'POST'])
-def route_login():
-    if current_user.is_authenticated:
-        return redirect(url_for('base_blueprint.home'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = Users.query.filter_by(email=form.username.data).first()
-        if user is None or not user.check_password(form.password.data):
-            logging.debug('Invalid username or password')
-            flash('Invalid username or password')
-            return redirect(url_for('admin_blueprint.route_login'))
-        logging.debug('Success!')
-        login_user(user, remember=form.remember_me.data)
-        return redirect(url_for('base_blueprint.home'))
-    return render_template('login.html', title='Sign In', form=form)
+router = APIRouter()
+templates = Jinja2Templates(directory="templates")
 
 
-@app.login.user_loader
-def load_user(id):
-    return Users.query.get(int(id))
+@router.get('/login', response_class=HTMLResponse)
+async def login(request: Request):
+    return templates.TemplateResponse("login.html", {"request": request})
 
 
-@blueprint.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('base_blueprint.home'))
+@router.post("/login")
+async def login(request: Request,
+                form_data: OAuth2PasswordRequestForm = Depends()):
+    user = await authenticate_user(form_data.username, form_data.password)
+
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                            detail="Incorrect email or password",
+                            headers={"WWW-Authenticate": "Bearer"})
+
+    access_token = create_access_token(data={"sub": user.email},
+                                       expires_delta=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+
+    response = RedirectResponse(url="/home")
+    response.set_cookie(key="access_token", value=f"Bearer {access_token}")
+
+    return response
+
+
+@router.get("/logout")
+async def logout(request: Request):
+    response = RedirectResponse(url="/login")
+    response.delete_cookie(key="access_token")
+
+    return response
